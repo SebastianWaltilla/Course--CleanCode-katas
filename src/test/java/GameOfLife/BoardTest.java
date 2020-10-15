@@ -27,7 +27,7 @@ public class BoardTest {
     @Test
     void createStartGridWhereEmptyPosisionIsFilledWithAPlus(){
         Grid grid = new Grid(19);
-        grid.getGrid();
+        grid.getGrid().get;
 
 
     }
