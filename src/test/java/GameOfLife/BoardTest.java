@@ -1,7 +1,7 @@
 package GameOfLife;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class BoardTest {
 
@@ -17,7 +17,7 @@ public class BoardTest {
     void CreateNewGridWithOldGrid(){
         Grid grid = new Grid(9);
         Grid newGrid = new Grid(grid);
-
+        assertTrue(newGrid instanceof Grid);
     }
 
 
