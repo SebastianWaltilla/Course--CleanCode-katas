@@ -5,8 +5,8 @@ public class Grid {
 
     private int[][] grid;
 
-    public Grid(int i) {
-
+    public Grid(int gridSize) {
+        grid = createEmptyGrid2dArray(gridSize);
     }
     public Grid(Grid grid) {
     }
