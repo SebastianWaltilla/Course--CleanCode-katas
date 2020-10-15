@@ -6,12 +6,19 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class BoardTest {
 
 
-    @Disabled
     @Test
     void createGridForGame(){
         Grid grid = new Grid(9);
         int gridSizeAnswer = 9;
         assertEquals(gridSizeAnswer, grid.getGridSize());
     }
+
+    @Test
+    void CreateNewGridWithOldGrid(){
+        Grid grid = new Grid(9);
+        Grid newGrid = new Grid(grid);
+
+    }
+
 
 }

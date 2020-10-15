@@ -9,7 +9,5 @@ public class Grid {
 
     }
 
-    public int getGridSize() {
-        return 9;
-    }
+
 }
