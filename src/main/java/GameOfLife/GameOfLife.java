@@ -9,5 +9,6 @@ public class GameOfLife {
     }
 
 
-
+    public void startNewGame() {
+    }
 }
