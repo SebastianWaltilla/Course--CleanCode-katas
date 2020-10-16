@@ -1,5 +1,6 @@
 package GameOfLife;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -7,15 +8,20 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class GameOfLifeTest {
 
+    Grid grid;
+    GameOfLife gol;
+
+    @BeforeEach
+    void init(){
+        Grid grid = new Grid(20);
+        GameOfLife gol = new GameOfLife(grid);
+    }
 
     @Test
     @DisplayName("1. Any live cell with fewer than two live neighbors" +
             " dies, as if caused by underpopulation.")
     void CheckNumbersOfNeighborsForeSpecificCell(){
-
-        GameOfLife gol = new GameOfLife();
-
-        checkIfCellDiesByNotHavingTwoNeighbors(int, grid);
+        gol.startNewGame();
     }
 
 
