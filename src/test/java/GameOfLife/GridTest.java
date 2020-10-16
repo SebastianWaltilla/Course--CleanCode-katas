@@ -27,7 +27,12 @@ public class BoardTest {
     @Test
     void createStartGridWhereEmptyPosisionIsFilledWithAPlus(){
         Grid grid = new Grid(19);
-        grid.getGrid().get;
+        grid.getGrid();
+    }
+
+    @Test
+    void createEmptyGrid2dArrayWhereEmptyPosisionIsFilledWithAPlus(){
+
 
 
     }
