@@ -8,17 +8,16 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class GridTest {
 
-    String[][] gridParameter;
+    int[][] gridParameter;
 
     @BeforeEach
     void createNew2dArray(){
 
-        gridParameter = new String[9][9];
-        for (String[] row : gridParameter){
-            Arrays.fill(row, "+");
+        gridParameter = new int[9][9];
+        for (int[] row : gridParameter){
+            Arrays.fill(row, 1);
         }
     }
-
 
     @Test
     void createGrid(){

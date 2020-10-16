@@ -14,7 +14,7 @@ public class Grid {
     }
 
 
-    private int[][] createEmptyGrid2dArray(int gridSize) {
+    public int[][] createEmptyGrid2dArray(int gridSize) {
         return new int[gridSize][gridSize];
     }
 
