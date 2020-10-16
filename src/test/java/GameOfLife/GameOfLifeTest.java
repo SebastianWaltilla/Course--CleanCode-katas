@@ -9,17 +9,19 @@ class GameOfLifeTest {
 
 
     @Test
-    void checkIfGridOnlyContains0And1s(){
-        Grid grid = new Grid(gridSize19);
-        assertTrue(grid.correctSetup());
+    @DisplayName("1. Any live cell with fewer than two live neighbors" +
+            " dies, as if caused by underpopulation.")
+    void CheckNumbersOfNeighborsForeSpecificCell(){
+
+        GameOfLife gol = new GameOfLife();
+
+        checkIfCellDiesByNotHavingTwoNeighbors(int, grid);
     }
 
 
 
     @Test
-    @DisplayName("1. Any live cell with fewer than two live neighbors" +
-            " dies, as if caused by" +
-            "    underpopulation.")
+
     void checkIfCellIsAlive(){
 
         Grid grid = new Grid(20);
