@@ -8,8 +8,16 @@ public class Grid {
     public Grid(int gridSize) {
         grid = createEmptyGrid2dArray(gridSize);
     }
-    public Grid(Grid grid) {
+
+    public Grid(int[][] newGrid){
+        grid = newGrid;
     }
+
+
+    private int[][] createEmptyGrid2dArray(int gridSize) {
+        return new int[gridSize][gridSize];
+    }
+
 
     public int getGridSize() {
         return 9;
