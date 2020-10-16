@@ -35,16 +35,21 @@ public class GridTest {
 
     @Test
     void createGridAssertSize(){
-        Grid grid = new Grid(9);
+        Grid grid = new Grid(19);
         int gridSizeAnswer = grid.getGrid().length;
         assertEquals(gridSizeAnswer, grid.size());
     }
 
     @Test
-    void createGridFrom2dArray(){
-        Grid grid = new Grid(19);
-        print2dArrayToConsole(grid.getGrid());
+    void createGridFrom2dArrayAssertItsInitializedWithZero(){
+        Grid grid = new Grid(gridSize19);
+        assertEquals(0, grid.getGrid()[0][0]);
     }
+
+
+
+
+
 
     public void print2dArrayToConsole(int[][] array){
         for (int[] row : array)

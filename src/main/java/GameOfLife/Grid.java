@@ -1,9 +1,7 @@
 package GameOfLife;
-
 import java.util.Arrays;
 
 public class Grid {
-
 
     private final int[][] grid;
 
@@ -42,6 +40,7 @@ public class Grid {
 
     @Override
     public String toString() {
+
         return "Grid{" +
                 "grid=" + Arrays.toString(grid) +
                 '}';

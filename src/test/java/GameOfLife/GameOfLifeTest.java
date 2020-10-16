@@ -8,11 +8,30 @@ import static org.junit.jupiter.api.Assertions.*;
 class GameOfLifeTest {
 
 
-    /*
-       @Test
-    @DisplayName("1. Any live cell with fewer than two live neighbors dies, as if caused by" +
+    @Test
+    void checkIfGridOnlyContains0And1s(){
+        Grid grid = new Grid(gridSize19);
+        assertTrue(grid.correctSetup());
+    }
+
+
+
+    @Test
+    @DisplayName("1. Any live cell with fewer than two live neighbors" +
+            " dies, as if caused by" +
             "    underpopulation.")
-    void method1(){
+    void checkIfCellIsAlive(){
+
+        Grid grid = new Grid(20);
+        GameOfLife gol = new GameOfLife();
+
+        gol.create(grid);
+
+    }
+
+
+    /*
+
 
     }
     @Test
