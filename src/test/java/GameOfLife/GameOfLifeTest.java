@@ -10,9 +10,9 @@ class GameOfLifeTest {
     int[][] gridAsArray;
 
     @BeforeEach
-    void createEmptyGrid2dArray(){
+    void createFilledGrid2dArray(){
          gridAsArray = new int[][]{
-                {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+                {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
                 {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
                 {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
                 {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
@@ -36,7 +36,7 @@ class GameOfLifeTest {
     }
 
     @Test
-    void check(){
+    void checkFirstCellAndReturnCenterCellWithNeighbors(){
 
 
 
