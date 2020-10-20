@@ -3,14 +3,14 @@ import java.util.Arrays;
 
 public class Grid {
 
-    private final int[][] grid;
+    private final int[][] gridArray;
 
     public Grid(int gridSize) {
-        grid = createEmptyGrid2dArray(gridSize);
+        gridArray = createEmptyGrid2dArray(gridSize);
     }
 
     public Grid(int[][] newGrid){
-        grid = newGrid;
+        gridArray = newGrid;
     }
 
     public int[][] createEmptyGrid2dArray(int gridSize) {
@@ -18,11 +18,11 @@ public class Grid {
     }
 
     public int size() {
-        return grid.length;
+        return gridArray.length;
     }
 
-    public int[][] getGrid() {
-        return grid;
+    public int[][] getGridArray() {
+        return gridArray;
     }
 
     @Override
@@ -30,19 +30,23 @@ public class Grid {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Grid grid1 = (Grid) o;
-        return Arrays.equals(grid, grid1.grid);
+        return Arrays.equals(gridArray, grid1.gridArray);
     }
 
     @Override
     public int hashCode() {
-        return Arrays.hashCode(grid);
+        return Arrays.hashCode(gridArray);
     }
 
     @Override
     public String toString() {
-
-        return "Grid{" +
-                "grid=" + Arrays.toString(grid) +
-                '}';
+        String gridString = "";
+        for (int row = 0; row < gridArray.length; row++) {
+            for (int col = 0; col < gridArray[row].length; col++) {
+                gridString = gridString + gridArray[row][col] + "\t";
+            }
+            gridString = gridString + "\n";
+        }
+        return gridString;
     }
 }
