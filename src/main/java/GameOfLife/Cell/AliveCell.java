@@ -1,19 +1,18 @@
-package GameOfLife;
+package GameOfLife.Cell;
 
-public class Cell {
-    private Boolean Alive = false;
+public class AliveCell implements CellLifeStatus{
+
     private final int x;
     private final int y;
 
-
-    public Cell(int x, int y) {
-        this.x = x;
-        this.y = y;
+    @Override
+    public boolean isAlive() {
+        return true;
     }
-    public Cell(int x, int y, boolean Alive2) {
+
+    public AliveCell(int x, int y) {
         this.x = x;
         this.y = y;
-        this.Alive = Alive2;
     }
 
     public Boolean getAlive() {
@@ -27,4 +26,6 @@ public class Cell {
     public int getY() {
         return y;
     }
+
+
 }

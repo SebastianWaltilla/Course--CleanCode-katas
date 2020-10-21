@@ -43,9 +43,8 @@ class GameOfLifeTest {
     @Test
     void checkIfCellIsAlive(){
 
-        Cell cell = new Cell(0, 0);
-
-
+        //Cell cell = new Cell(0, 0);
+        //assertTrue(gol.checkAliveCell(cell));
 
 
 
