@@ -37,7 +37,7 @@ class GameOfLifeTest {
 
     @Test
     void checkFirstCellAndReturnCenterCellWithNeighbors(){
-
+            gol.getGrid();
 
     }
 
