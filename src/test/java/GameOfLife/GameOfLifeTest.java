@@ -41,8 +41,12 @@ class GameOfLifeTest {
     }
 
     @Test
-    void CheckIfCellInGolGridIsAlive(){
-        assertTrue(gol.checkIfFirstCellIsAlive());
+    void checkIfCellIsAlive(){
+
+        Cell cell = new cell(int x, int y);
+
+
+
 
 
     }
