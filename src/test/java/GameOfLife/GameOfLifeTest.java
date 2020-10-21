@@ -36,8 +36,15 @@ class GameOfLifeTest {
     }
 
     @Test
-    void checkFirstCellAndReturnCenterCellWithNeighbors(){
-            assertEquals(gol.getGrid().getGridArray(), testGrid.getGridArray());
+    void checkSameGridIsInGolInstance(){
+         assertEquals(gol.getGrid().getGridArray(), testGrid.getGridArray());
+    }
+
+    @Test
+    void CheckIfCellInGolGridIsAlive(){
+        assertTrue(gol.checkIfFirstCellIsAlive());
+
+
     }
 
 
