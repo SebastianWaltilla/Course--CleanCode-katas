@@ -57,6 +57,19 @@ class GameOfLifeTest {
         assertEquals(gol.getGrid().getGridArray()[0][0], 1);
     }
 
+    @Test
+    void turnIntToCell(){
+        gol.turnIntToCell();
+
+    }
+
+    @Test
+    @DisplayName("if value is 1, cell is alive")
+    void checkIfCellIsAliveInNextGeneration(){
+        assertEquals(gol.getGrid().getGridArray()[0][0], 1);
+    }
+
+
 
    /*
 
