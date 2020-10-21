@@ -5,13 +5,12 @@ import static org.junit.jupiter.api.Assertions.*;
 
 
 class GameOfLifeTest {
-
     GameOfLife gol;
-    int[][] gridAsArray;
+    Grid testGrid;
 
     @BeforeEach
     void createFilledGrid2dArray(){
-         gridAsArray = new int[][]{
+         int[][] gridAsArray = new int[][]{
                 {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
                 {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
                 {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
@@ -32,13 +31,13 @@ class GameOfLifeTest {
                 {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
                 {0, 1, 1, 0, 0, 1, 1, 1, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0}
         };
-        gol = new GameOfLife();
+        testGrid = new Grid(gridAsArray);
+        gol = new GameOfLife(testGrid);
     }
 
     @Test
     void checkFirstCellAndReturnCenterCellWithNeighbors(){
-            gol.getGrid();
-
+            assertEquals(gol.getGrid().getGridArray(), testGrid.getGridArray());
     }
 
 
