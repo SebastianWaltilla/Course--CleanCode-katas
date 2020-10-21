@@ -59,8 +59,7 @@ class GameOfLifeTest {
 
     @Test
     void turnIntToCell(){
-        gol.turnIntToCell();
-
+       assertTrue(gol.turnIntToCell(1));
     }
 
     @Test
