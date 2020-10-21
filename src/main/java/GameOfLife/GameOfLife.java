@@ -8,8 +8,12 @@ public class GameOfLife {
 
     }
 
-    public void startNewGame(int[][] gameGrid) {
-        grid = new Grid(gameGrid);
+    public void startNewGame(Grid newGrid) {
+        grid = newGrid;
+    }
+
+    public Grid getGrid() {
+        return grid;
     }
 
 
