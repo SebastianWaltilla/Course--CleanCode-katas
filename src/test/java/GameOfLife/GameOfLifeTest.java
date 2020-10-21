@@ -1,5 +1,6 @@
 package GameOfLife;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -45,19 +46,21 @@ class GameOfLifeTest {
     }
 
     @Test
+
     void checkSameGridIsInGolInstance(){
          assertEquals(gol.getGrid().getGridArray(), testGrid.getGridArray());
     }
 
     @Test
+    @DisplayName("if value is 1, cell is alive")
     void checkIfCellIsAlive(){
-
+        assertEquals(gol.getGrid().getGridArray()[0][0], 1);
     }
 
 
    /*
 
-    @DisplayName("1. Any live cell with fewer than two live neighbors" +
+        @DisplayName("1. Any live cell with fewer than two live neighbors" +
             " dies, as if caused by underpopulation.")
 
     }
