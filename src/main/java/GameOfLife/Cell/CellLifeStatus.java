@@ -1,7 +1,7 @@
 package GameOfLife.Cell;
 
 @FunctionalInterface
-public interface CellLifeStatus {
+interface CellLifeStatus {
 
    public boolean isAlive();
 

@@ -5,9 +5,9 @@ public class Cell {
     private final int x;
     private final int y;
 
-    public Cell(int x, int y) {
-        this.x = x;
-        this.y = y;
+    public Cell(int x2, int y2) {
+        x = x2;
+        y = y2;
     }
 
 }

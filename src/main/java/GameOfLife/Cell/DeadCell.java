@@ -9,10 +9,8 @@ public class DeadCell extends Cell implements CellLifeStatus{
         return false;
     }
 
-
     public DeadCell(int x, int y) {
-        this.x = x;
-        this.y = y;
+       super(x,y);
     }
 
 
