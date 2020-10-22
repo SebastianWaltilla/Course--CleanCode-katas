@@ -83,16 +83,16 @@ class GameOfLifeTest {
     @Test
     void givenGridMaxSizeCellsSHouldBeCreated() {
         gol.startGame(3,3);
-        assertEquals(9, gol.getAllCells().size());
+        assertEquals(9, gol.getCurrentGenerationCells().size());
     }
 
     @Test
     void addAliveCellsToListWithCellsCheckIfAlive(){
         gol.startGame(10,10);
-        gol.getAllCells().get(92).alive();
-        gol.getAllCells().get(93).alive();
-        gol.getAllCells().get(94).alive();
-        gol.getAllCells().get(95).alive();
+        gol.getCurrentGenerationCells().get(92).alive();
+        gol.getCurrentGenerationCells().get(93).alive();
+        gol.getCurrentGenerationCells().get(94).alive();
+        gol.getCurrentGenerationCells().get(95).alive();
         gol.getAliveAmountOfNeighbours(5,8);
         assertEquals(2, gol.getAliveAmountOfNeighbours(9,4));
     }

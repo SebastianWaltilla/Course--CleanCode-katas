@@ -26,4 +26,18 @@ public class Cell {
     public void alive() {
         this.alive = true;
     }
+
+    public void kill() {
+        alive = false;
+    }
+
+    @Override
+    public String toString() {
+
+        String rep = ".";
+            if(alive = true){
+            rep = "*";
+        }
+        return rep;
+    }
 }
