@@ -44,6 +44,8 @@ class GameOfLifeTest {
 
 
         gol = new GameOfLife();
+        gol.startGame(grid);
+
         //testGrid = new Grid(gridOfInts);
         //gol = new GameOfLife(testGrid);
     }
@@ -76,7 +78,6 @@ class GameOfLifeTest {
     @Test
     void whenStartGameGridShouldBeEqualToStartGrid() {
 
-        gol.startGame(grid);
 
         assertEquals(grid,gol.nextGeneration());
 
@@ -84,7 +85,6 @@ class GameOfLifeTest {
 
     @Test
     void checkIfLastGenerationIsEqualToNextGeneration(){
-        gol.startGame(grid);
         gol.getListOfGenerations().add(grid);
         assertTrue(gol.lastGenerationSameAsNext());
     }
@@ -92,13 +92,15 @@ class GameOfLifeTest {
     @Test
     void getAliveNeighboursOfCornerCaseCell() {
 
-        gol.startGame(grid);
         assertEquals(2,gol.getAliveAmountOfNeighbours(0,0));
 
     }
 
+    @Test
+    void getAliveNeighborsOfCenterCaseCell(){
+        assertEquals(4,gol.getAliveAmountOfNeighbours(2,2));
 
-
+    }
     /*
 
         @DisplayName("1. Any live cell with fewer than two live neighbors" +

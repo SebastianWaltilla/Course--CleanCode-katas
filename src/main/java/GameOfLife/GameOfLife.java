@@ -1,8 +1,8 @@
 package GameOfLife;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class GameOfLife {
 
@@ -47,6 +47,33 @@ public class GameOfLife {
 
     public int getAliveAmountOfNeighbours(int x, int y) {
 
+        int[][] grid = new int[][]{
+                {1, 0, 0},
+                {1, 1, 0},
+                {1, 0, 1}
+        };
+
+        Map<Integer, Integer> xAndYPosisionsOfNeighbors2 = Stream.of(new Integer[][] {
+                {-1, -1},{0, -1},{1, -1},
+                {-1, 0},         {1, 0},
+                {-1, 1}, {0, 1}, {1, 1},
+        }).collect(Collectors.toMap(data -> data[0], data -> data[1]));
+
+
+        int numberOfNeighbors = xAndYPosisionsOfNeighbors2
+                                                                        .entrySet()
+                                                                        .stream()
+                                                                        .mapToInt( s  -> grid[s.getKey()][s.getValue()])// här borde det vara .orElse(0)
+                                                                        .filter(b -> equals(1))
+                                                                        .c
+
+
+
+                //filter( e -> grid[e.getKey()][e.getValue()])
+
+
+
+
         int[][] currentGen = listOfGenerations.get(listOfGenerations.size()-1);
         int numberOfNeighbours = 0;
 
@@ -59,6 +86,17 @@ public class GameOfLife {
 
 
         return numberOfNeighbours;
+    }
+
+    private Map<Integer, Integer> xAndYPosisionsOfNeighborsAsHashmap(){
+
+        Map<Integer, Integer> xAndYPosisionsOfNeighbors2 = Stream.of(new Integer[][] {
+                {-1, -1},{0, -1},{1, -1},
+                {-1, 0},         {1, 0},
+                {-1, 1}, {0, 1}, {1, 1},
+        }).collect(Collectors.toMap(data -> data[0], data -> data[1]));
+
+        return xAndYPosisionsOfNeighbors2;
     }
 }
 
