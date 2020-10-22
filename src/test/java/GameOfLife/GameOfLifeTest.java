@@ -98,7 +98,7 @@ class GameOfLifeTest {
 
     @Test
     void getAliveNeighborsOfCenterCaseCell(){
-        assertEquals(4,gol.getAliveAmountOfNeighbours(2,2));
+        assertEquals(4,gol.getAliveAmountOfNeighbours(1,1));
 
     }
     /*

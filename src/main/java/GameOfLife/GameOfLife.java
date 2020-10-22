@@ -1,5 +1,7 @@
 package GameOfLife;
 
+import GameOfLife.Cell.Cell;
+
 import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -45,48 +47,36 @@ public class GameOfLife {
         return Arrays.equals(listOfGenerations.get(listOfGenerations.size() - 1), listOfGenerations.get(listOfGenerations.size() - 2));
     }
 
-    public int getAliveAmountOfNeighbours(int x, int y) {
+    public int getAliveAmountOfNeighbours(int xIn, int yIn) {
 
-        int[][] grid = new int[][]{
+        Integer[][] grid = new Integer[][]{
                 {1, 0, 0},
                 {1, 1, 0},
                 {1, 0, 1}
         };
 
-        Map<Integer, Integer> xAndYPosisionsOfNeighbors2 = Stream.of(new Integer[][] {
-                {-1, -1},{0, -1},{1, -1},
-                {-1, 0},         {1, 0},
-                {-1, 1}, {0, 1}, {1, 1},
-        }).collect(Collectors.toMap(data -> data[0], data -> data[1]));
+        List<Cell> cellPosisionOfNeighbors = new ArrayList<>();
+        cellPosisionOfNeighbors.add(new Cell(-1, -1));
+        cellPosisionOfNeighbors.add(new Cell(0, -1));
+        cellPosisionOfNeighbors.add(new Cell(1, -1));
+        cellPosisionOfNeighbors.add(new Cell(-1, 0));
+        cellPosisionOfNeighbors.add(new Cell(1, 0));
+        cellPosisionOfNeighbors.add(new Cell(-1, 1));
+        cellPosisionOfNeighbors.add(new Cell(0, 1));
+        cellPosisionOfNeighbors.add(new Cell(1, 1));
 
 
-        int numberOfNeighbors = xAndYPosisionsOfNeighbors2
-                                                                        .entrySet()
-                                                                        .stream()
-                                                                        .mapToInt( s  -> grid[s.getKey()][s.getValue()])// här borde det vara .orElse(0)
-                                                                        .filter(b -> equals(1))
-                                                                        .c
-
-
-
-                //filter( e -> grid[e.getKey()][e.getValue()])
-
-
-
-
-        int[][] currentGen = listOfGenerations.get(listOfGenerations.size()-1);
-        int numberOfNeighbours = 0;
-
-        if(currentGen[x+1][y] == 1)
-            numberOfNeighbours++;
-        if(currentGen[x+1][y+1] == 1)
-            numberOfNeighbours++;
-        if(currentGen[x][y+1] == 1)
-            numberOfNeighbours++;
-
-
+        int numberOfNeighbours = (int)cellPosisionOfNeighbors.stream()
+                                                        .map( s -> grid[xIn + s.getX()][yIn + s.getY()])
+                                                        .map(Optional::ofNullable)
+                                                        .filter(s -> s.get().equals(1))
+                                                        .count();
         return numberOfNeighbours;
     }
+
+
+
+
 
     private Map<Integer, Integer> xAndYPosisionsOfNeighborsAsHashmap(){
 
