@@ -45,6 +45,7 @@ class GameOfLifeTest {
 
         gol = new GameOfLife();
         gol.startGame(grid);
+        gol.startGame(3,3);
 
         //testGrid = new Grid(gridOfInts);
         //gol = new GameOfLife(testGrid);
@@ -92,15 +93,30 @@ class GameOfLifeTest {
     @Test
     void getAliveNeighboursOfCornerCaseCell() {
 
-        assertEquals(2,gol.getAliveAmountOfNeighbours(0,0));
+        assertEquals(3,gol.getAliveAmountOfNeighbours(0,0));
 
     }
 
     @Test
     void getAliveNeighborsOfCenterCaseCell(){
-        assertEquals(4,gol.getAliveAmountOfNeighbours(1,1));
+        assertEquals(8,gol.getAliveAmountOfNeighbours(1,1));
 
     }
+
+    @Test
+    void startGameWithGridSizeCreateCellObjects() {
+        gol.startGame(3,3);
+
+    }
+
+    @Test
+    void givenGridMaxSizeCellsSHouldBeCreated() {
+        gol.startGame(3,3);
+        assertEquals(9, gol.getAllCells().size());
+    }
+
+
+
     /*
 
         @DisplayName("1. Any live cell with fewer than two live neighbors" +

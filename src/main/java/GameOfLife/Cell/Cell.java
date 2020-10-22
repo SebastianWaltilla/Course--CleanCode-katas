@@ -4,6 +4,7 @@ public class Cell {
 
     private final int x;
     private final int y;
+    private boolean alive;
 
     public Cell(int x2, int y2) {
         x = x2;
@@ -16,5 +17,9 @@ public class Cell {
 
     public int getY() {
         return y;
+    }
+
+    public boolean isAlive() {
+        return alive;
     }
 }
