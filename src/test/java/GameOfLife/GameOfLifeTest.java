@@ -90,12 +90,14 @@ class GameOfLifeTest {
     }
 
     @Test
-    void getAliveNeighboursOfOneCell() {
+    void getAliveNeighboursOfCornerCaseCell() {
 
         gol.startGame(grid);
         assertEquals(2,gol.getAliveAmountOfNeighbours(0,0));
 
     }
+
+
 
     /*
 
