@@ -29,6 +29,11 @@ public class GameOfLife {
     public int[][] nextGeneration(int[][] gridOfInts) {
         return gridOfInts;
     }
+
+    public boolean lastGenerationSameAsNext() {
+
+        return false;
+    }
 }
 
 
