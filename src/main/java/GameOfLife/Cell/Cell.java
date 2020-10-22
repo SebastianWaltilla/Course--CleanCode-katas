@@ -22,4 +22,8 @@ public class Cell {
     public boolean isAlive() {
         return alive;
     }
+
+    public void alive() {
+        this.alive = true;
+    }
 }

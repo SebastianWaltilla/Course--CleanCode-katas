@@ -1,8 +1,8 @@
 package GameOfLife;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
+import GameOfLife.Cell.Cell;
+import org.junit.jupiter.api.*;
+
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -11,44 +11,15 @@ class GameOfLifeTest {
     GameOfLife gol;
     Grid testGrid;
     int[][] grid;
+    private List<Cell> allCells;
 
     @BeforeEach
     void createFilledGrid2dArray(){
-         int[][] gridAsArray = new int[][]{
-                {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-                {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-                {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-                {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-                {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-                {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-                {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-                {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-                {0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-                {0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0},
-                {0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0},
-                {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-                {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-                {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-                {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-                {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-                {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-                {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-                {0, 1, 1, 0, 0, 1, 1, 1, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0}
-        };
-
-        grid = new int[][]{
-                {1, 0, 0},
-                {1, 1, 0},
-                {1, 0, 1}
-        };
-
 
         gol = new GameOfLife();
         gol.startGame(grid);
         gol.startGame(3,3);
 
-        //testGrid = new Grid(gridOfInts);
-        //gol = new GameOfLife(testGrid);
     }
 
     @Disabled
@@ -78,9 +49,8 @@ class GameOfLifeTest {
 
     @Test
     void whenStartGameGridShouldBeEqualToStartGrid() {
-
-
-        assertEquals(grid,gol.nextGeneration());
+        gol.startGame(3,3);
+        assertEquals(9,gol.allCells().size());
 
     }
 
@@ -116,13 +86,31 @@ class GameOfLifeTest {
         assertEquals(9, gol.getAllCells().size());
     }
 
+    @Test
+    void addAliveCellsToListWithCellsCheckIfAlive(){
+        gol.startGame(10,10);
+        gol.getAllCells().get(92).alive();
+        gol.getAllCells().get(93).alive();
+        gol.getAllCells().get(94).alive();
+        gol.getAllCells().get(95).alive();
+        gol.getAliveAmountOfNeighbours(5,8);
+        assertEquals(2, gol.getAliveAmountOfNeighbours(9,4));
+    }
 
+
+
+
+    @Test
+    @DisplayName("1. Any live cell with fewer than two live neighbors" +
+            " dies, as if caused by underpopulation.")
+    void aliveCellHasFewerThanTwoNeighbors(){
+
+    }
 
 
     /*
 
-        @DisplayName("1. Any live cell with fewer than two live neighbors" +
-            " dies, as if caused by underpopulation.")
+
 
     }
     @Test
