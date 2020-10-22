@@ -73,14 +73,15 @@ public class GameOfLife {
         };
 
         List<Cell> cellPosisionOfNeighbors = new ArrayList<>();
-        cellPosisionOfNeighbors.add(new Cell(-1, -1));
-        cellPosisionOfNeighbors.add(new Cell(0, -1));
-        cellPosisionOfNeighbors.add(new Cell(1, -1));
-        cellPosisionOfNeighbors.add(new Cell(-1, 0));
-        cellPosisionOfNeighbors.add(new Cell(1, 0));
-        cellPosisionOfNeighbors.add(new Cell(-1, 1));
-        cellPosisionOfNeighbors.add(new Cell(0, 1));
-        cellPosisionOfNeighbors.add(new Cell(1, 1));
+        cellPosisionOfNeighbors.add(new Cell(xIn -1, yIn -1));
+        cellPosisionOfNeighbors.add(new Cell(xIn, yIn -1));
+        cellPosisionOfNeighbors.add(new Cell(xIn +1, yIn -1));
+        cellPosisionOfNeighbors.add(new Cell(xIn -1, yIn));
+        cellPosisionOfNeighbors.add(new Cell(xIn +1, yIn ));
+        cellPosisionOfNeighbors.add(new Cell(xIn -1, yIn +1));
+        cellPosisionOfNeighbors.add(new Cell(xIn, yIn +1));
+        cellPosisionOfNeighbors.add(new Cell(xIn +1, yIn +1));
+
 
 
        /* int numberOfNeighbours = (int)cellPosisionOfNeighbors.stream()
@@ -106,7 +107,7 @@ public class GameOfLife {
          .filter(two -> cellPosisionOfNeighbors.stream()
          .anyMatch(one -> one.getX() == two.getX()
         && one.getY() == two.getY()))
-         //.filter(c ->c.isAlive())
+         .filter(c ->c.isAlive())
          .count();
 
         //return numberOfNeighbours;

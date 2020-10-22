@@ -99,6 +99,7 @@ class GameOfLifeTest {
 
     @Test
     void getAliveNeighborsOfCenterCaseCell(){
+
         assertEquals(8,gol.getAliveAmountOfNeighbours(1,1));
 
     }
@@ -114,6 +115,7 @@ class GameOfLifeTest {
         gol.startGame(3,3);
         assertEquals(9, gol.getAllCells().size());
     }
+
 
 
 
