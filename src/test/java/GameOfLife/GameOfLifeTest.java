@@ -10,7 +10,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class GameOfLifeTest {
     GameOfLife gol;
     Grid testGrid;
-    int[][] gridOfInts;
+    int[][] grid;
 
     @BeforeEach
     void createFilledGrid2dArray(){
@@ -36,7 +36,7 @@ class GameOfLifeTest {
                 {0, 1, 1, 0, 0, 1, 1, 1, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0}
         };
 
-        gridOfInts = new int[][]{
+        grid = new int[][]{
                 {1, 0, 0},
                 {1, 1, 0},
                 {1, 0, 1}
@@ -76,19 +76,27 @@ class GameOfLifeTest {
     @Test
     void whenStartGameGridShouldBeEqualToStartGrid() {
 
-        gol.startGame(gridOfInts);
-        assertEquals(gridOfInts,gol.nextGeneration(gridOfInts));
+        gol.startGame(grid);
+
+        assertEquals(grid,gol.nextGeneration());
 
     }
 
     @Test
     void checkIfLastGenerationIsEqualToNextGeneration(){
-
-        assertFalse(gol.lastGenerationSameAsNext());
+        gol.startGame(grid);
+        gol.getListOfGenerations().add(grid);
+        assertTrue(gol.lastGenerationSameAsNext());
     }
 
+    @Test
+    void getAliveNeighboursOfOneCell() {
 
-/*
+        assertEquals(2,gol.getAliveNeighbours(grid[0][0]));
+
+    }
+
+    /*
 
         @DisplayName("1. Any live cell with fewer than two live neighbors" +
             " dies, as if caused by underpopulation.")
