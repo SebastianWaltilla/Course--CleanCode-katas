@@ -2,9 +2,13 @@ package GameOfLife;
 
 public class GameOfLife {
 
-    private Grid grid;
+    //private Grid grid;
 
-    public GameOfLife(Grid newGrid) {
+    public GameOfLife(){
+
+    }
+
+    /*public GameOfLife(Grid newGrid) {
     grid = newGrid;
     }
 
@@ -15,15 +19,16 @@ public class GameOfLife {
     public void startNewGame(Grid newGrid) {
         grid = newGrid;
     }
+*/
+
+    public void startGame(int[][] grid){
+
+    }
 
 
-
-
-
-
-
-
-
+    public int[][] nextGeneration(int[][] gridOfInts) {
+        return gridOfInts;
+    }
 }
 
 
