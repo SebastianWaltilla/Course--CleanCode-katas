@@ -2,6 +2,7 @@ package GameOfLife;
 import GameOfLife.Cell.Cell;
 import org.junit.jupiter.api.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -9,43 +10,13 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class GameOfLifeTest {
     GameOfLife gol;
-    Grid testGrid;
-    int[][] grid;
-    private List<Cell> allCells;
 
     @BeforeEach
     void createFilledGrid2dArray(){
-
         gol = new GameOfLife();
-        gol.startGame(grid);
-        gol.startGame(3,3);
 
     }
 
-    @Disabled
-    @Test
-    void checkSameGridIsInGolInstance(){
-        // assertEquals(gol.getGrid().getGridArray(), testGrid.getGridArray());
-    }
-
-    @Disabled
-    @Test
-    @DisplayName("if value is 1, cell is alive")
-    void checkIfCellIsAlive(){
-        //assertEquals(gol.getGrid().getGridArray()[0][0], 1);
-    }
-
-    @Disabled
-    @Test
-    void turnIntToCell(){
-       //assertTrue(gol.turnIntToCell(1));
-    }
-    @Disabled
-    @Test
-    @DisplayName("if value is 1, cell is alive")
-    void checkIfCellIsAliveInNextGeneration(){
-       // assertEquals(gol.getGrid().getGridArray()[0][0], 1);
-    }
 
     @Test
     void whenStartGameGridShouldBeEqualToStartGrid() {
@@ -56,21 +27,60 @@ class GameOfLifeTest {
 
     @Test
     void checkIfLastGenerationIsEqualToNextGeneration(){
-        gol.getListOfGenerations().add(grid);
+        List<Cell> one = new ArrayList<>();
+        List<Cell> two = new ArrayList<>();
+
+        one.add(new Cell(0,0));
+        one.add(new Cell(2,0));
+
+        two.add(new Cell(0,0));
+        Cell cell = new Cell(2,0);
+        two.add(cell);
+
+        gol.getPreviousGenerationCells().add(one);
+        gol.getPreviousGenerationCells().add(two);
+
         assertTrue(gol.lastGenerationSameAsNext());
     }
 
     @Test
     void getAliveNeighboursOfCornerCaseCell() {
+        int[][] grid = new int[][]{
+                {0,1,0,0,0,0,0,0,0,0},
+                {1,1,0,0,0,0,0,0,0,0},
+                {0,0,0,0,0,0,0,0,0,0},
+                {0,0,0,1,0,0,0,0,0,0},
+                {0,0,0,1,0,0,0,0,0,0},
+                {0,0,0,1,0,0,0,0,0,0},
+                {0,0,0,1,1,1,0,0,0,0},
+                {0,0,0,0,0,0,0,0,0,0},
+                {0,0,0,0,0,0,0,0,0,0},
+                {0,0,0,1,1,1,1,0,0,0}
+        };
 
+        gol.startGame(grid);
         assertEquals(3,gol.getAliveAmountOfNeighbours(0,0));
 
     }
 
     @Test
     void getAliveNeighborsOfCenterCaseCell(){
+        int[][] grid2 = new int[][]{
+                {0,1,1,0,0,0,0,0,0,0},
+                {0,0,1,0,0,0,0,0,0,0},
+                {0,1,1,0,0,0,0,0,0,0},
+                {0,0,0,1,0,0,0,0,0,0},
+                {0,0,0,1,0,0,0,0,0,0},
+                {0,0,0,1,0,0,0,0,0,0},
+                {0,0,0,1,1,1,0,0,0,0},
+                {0,0,0,0,0,0,0,0,0,0},
+                {0,0,0,0,0,0,0,0,0,0},
+                {0,0,0,1,1,1,1,0,0,0}
+        };
 
-        assertEquals(8,gol.getAliveAmountOfNeighbours(1,1));
+        gol.startGame(grid2);
+
+        assertEquals(5,gol.getAliveAmountOfNeighbours(1,1));
 
     }
 
@@ -105,8 +115,32 @@ class GameOfLifeTest {
             " dies, as if caused by underpopulation.")
     void aliveCellHasFewerThanTwoNeighbors(){
 
+
+
+
     }
 
+    @Test
+    void convertGridToArray_test() {
+       int[][] grid2 = new int[][]{
+               {0,0,0,0,0,0,0,0,0,0},
+               {0,0,0,0,0,0,0,0,0,0},
+               {0,0,0,0,0,0,0,0,0,0},
+               {0,0,0,1,0,0,0,0,0,0},
+               {0,0,0,1,0,0,0,0,0,0},
+               {0,0,0,1,0,0,0,0,0,0},
+               {0,0,0,1,1,1,0,0,0,0},
+               {0,0,0,0,0,0,0,0,0,0},
+               {0,0,0,0,0,0,0,0,0,0},
+               {0,0,0,1,1,1,1,0,0,0}
+       };
+
+       gol.startGame(grid2);
+
+        assertEquals(100, gol.getCurrentGenerationCells().size());
+       assertTrue(gol.getCurrentGenerationCells().get(94).isAlive());
+
+    }
 
     /*
 
