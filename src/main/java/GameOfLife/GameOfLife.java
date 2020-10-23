@@ -2,9 +2,9 @@ package GameOfLife;
 
 import GameOfLife.Cell.Cell;
 
+import java.sql.SQLOutput;
 import java.util.*;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public class GameOfLife {
 
@@ -26,10 +26,11 @@ public class GameOfLife {
 
     public void startGame(int[][] grid) {
 
-        convertGridToArray(grid);
+        convertGridToList(grid);
+
     }
 
-    private void convertGridToArray(int[][] grid) {
+    private void convertGridToList(int[][] grid) {
 
         for (int i = 0; i < grid.length; i++) {
             for (int j = 0; j < grid.length; j++) {
@@ -90,13 +91,7 @@ public class GameOfLife {
 
     }
 
-    @Override
-    public String toString() {
 
-        // tomorrow
-
-        return ":";
-    }
 
     public List<Cell> allCells() {
         return currentGenerationCells;
@@ -144,18 +139,19 @@ public class GameOfLife {
         return n;
     }
 
-    private Map<Integer, Integer> xAndYPosisionsOfNeighborsAsHashmap() {
+    @Override
+    public String toString() {
 
-        Map<Integer, Integer> xAndYPosisionsOfNeighbors2 = Stream.of(new Integer[][]{
-                {-1, -1}, {0, -1}, {1, -1},
-                {-1, 0}, {1, 0},
-                {-1, 1}, {0, 1}, {1, 1},
-        }).collect(Collectors.toMap(data -> data[0], data -> data[1]));
 
-        return xAndYPosisionsOfNeighbors2;
+        String f = currentGenerationCells.stream()
+                        // if c = 0       om ja =              :(else)om nej
+                .map(c-> c.getY() == 0 ? "\n" + c.toString()  : c.toString())
+                .collect(Collectors.joining(""));;
+
+        System.out.print(f);
+        return f;
+
     }
-
-
 }
 
 

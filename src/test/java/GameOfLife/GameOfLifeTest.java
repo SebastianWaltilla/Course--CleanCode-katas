@@ -1,7 +1,11 @@
 package GameOfLife;
 import GameOfLife.Cell.Cell;
+import org.junit.After;
+import org.junit.Before;
 import org.junit.jupiter.api.*;
 
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,6 +20,9 @@ class GameOfLifeTest {
         gol = new GameOfLife();
 
     }
+
+
+
 
 
     @Test
@@ -115,10 +122,10 @@ class GameOfLifeTest {
             " dies, as if caused by underpopulation.")
     void aliveCellHasFewerThanTwoNeighbors(){
 
-
-
-
     }
+
+
+
 
     @Test
     void convertGridToArray_test() {
@@ -142,34 +149,30 @@ class GameOfLifeTest {
 
     }
 
-    /*
 
 
 
-    }
     @Test
-    @DisplayName(" 2. Any live cell with more than three live neighbors dies, as if by" +
-            "    overcrowding.")
-    void method2(){
+    void printArrayToConsole(){
+        int[][] grid2 = new int[][]{
+                {1,0,0,0,0},
+                {0,1,0,0,0},
+                {0,0,0,0,0},
+                {0,0,0,0,0},
+                {0,0,0,0,0}
+        };
+
+        String arrayAsString =  "\n*,.,.,.,.,"+
+                                "\n.,*,.,.,.," +
+                                "\n.,.,.,.,.," +
+                                "\n.,.,.,.,.," +
+                                "\n.,.,.,.,.,";
+
+        gol.startGame(grid2);
+        gol.toString();
+        assertEquals(arrayAsString, gol.toString());
 
     }
-    @Test
-    @DisplayName(" 3. Any live cell with two or three live neighbors lives on to the next" +
-            "    generation.")
-    void method3(){
-
-    }
-    @Test
-    @DisplayName("4. Any dead cell with exactly three live neighbors becomes a live cell.")
-    void method4(){
-
-    }
-
-     */
-
-
-
-
 
 
 }

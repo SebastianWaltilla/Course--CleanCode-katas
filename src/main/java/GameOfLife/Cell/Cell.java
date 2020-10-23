@@ -39,10 +39,10 @@ public class Cell {
     @Override
     public String toString() {
 
-        String rep = ".";
-            if(alive = true){
-            rep = "*";
-        }
+        String rep = ".,";
+            if(isAlive()){
+            rep = "*,";
+            }
         return rep;
     }
 
