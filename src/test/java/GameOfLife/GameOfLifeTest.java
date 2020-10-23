@@ -103,6 +103,26 @@ class GameOfLifeTest {
         assertEquals(9, gol.getCurrentGenerationCells().size());
     }
 
+
+    @Test
+    void givenGridMaxSizeNotSquareGridWithIntConstructor_test() {
+        gol.startGame(3,4);
+        assertEquals(12, gol.getCurrentGenerationCells().size());
+    }
+
+    @Test
+    void givenGridMaxSizeNotSquareGridWithGridConstructor_test() {
+        int[][] grid2 = new int[][]{
+                {1,0,0,0,0},
+                {0,1,0,0,0},
+                {0,0,0,0,0}
+
+        };
+
+        gol.startGame(grid2);
+        assertEquals(15, gol.getCurrentGenerationCells().size());
+    }
+
     @Test
     void addAliveCellsToListWithCellsCheckIfAlive(){
         gol.startGame(10,10);
