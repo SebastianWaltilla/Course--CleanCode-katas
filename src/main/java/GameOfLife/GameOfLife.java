@@ -93,7 +93,7 @@ public class GameOfLife {
 
 
 
-    public List<Cell> allCells() {
+    public List<Cell> currentGenerationsCells() {
         return currentGenerationCells;
     }
 

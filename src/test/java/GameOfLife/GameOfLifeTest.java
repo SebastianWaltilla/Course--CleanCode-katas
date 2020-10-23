@@ -1,11 +1,7 @@
 package GameOfLife;
 import GameOfLife.Cell.Cell;
-import org.junit.After;
-import org.junit.Before;
 import org.junit.jupiter.api.*;
 
-import java.io.ByteArrayOutputStream;
-import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,11 +20,11 @@ class GameOfLifeTest {
 
 
 
-
+    @DisplayName("given two int values list of current generation cells should filled with cells")
     @Test
     void whenStartGameGridShouldBeEqualToStartGrid() {
         gol.startGame(3,3);
-        assertEquals(9,gol.allCells().size());
+        assertEquals(9,gol.currentGenerationsCells().size());
 
     }
 
