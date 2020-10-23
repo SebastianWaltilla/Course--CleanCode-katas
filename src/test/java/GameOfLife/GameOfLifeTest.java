@@ -17,9 +17,6 @@ class GameOfLifeTest {
 
     }
 
-
-
-
     @DisplayName("given two int values list of current generation cells should filled with cells")
     @Test
     void whenStartGameGridShouldBeEqualToStartGrid() {
@@ -82,7 +79,6 @@ class GameOfLifeTest {
         };
 
         gol.startGame(grid2);
-
         assertEquals(5,gol.getAliveAmountOfNeighbours(1,1));
 
     }
@@ -130,18 +126,12 @@ class GameOfLifeTest {
         assertEquals(2, gol.getAliveAmountOfNeighbours(9,4));
     }
 
-
-
-
     @Test
     @DisplayName("1. Any live cell with fewer than two live neighbors" +
             " dies, as if caused by underpopulation.")
     void aliveCellHasFewerThanTwoNeighbors(){
 
     }
-
-
-
 
     @Test
     void convertGridToArray_test() {
@@ -165,27 +155,22 @@ class GameOfLifeTest {
 
     }
 
-
-
-
     @Test
     void printArrayToConsole(){
         int[][] grid2 = new int[][]{
-                {1,0,0,0,0},
-                {0,1,0,0,0},
+                {0,0,0,0,0},
+                {0,1,1,1,0},
                 {0,0,0,0,0},
                 {0,0,0,0,0},
                 {0,0,0,0,0}
         };
-
-        String arrayAsString =  "\n*,.,.,.,.,"+
-                                "\n.,*,.,.,.," +
-                                "\n.,.,.,.,.," +
+        String arrayAsString =  "\n.,.,*,.,.,"+
+                                "\n.,.,*,.,.," +
+                                "\n.,.,*,.,.," +
                                 "\n.,.,.,.,.," +
                                 "\n.,.,.,.,.,";
 
         gol.startGame(grid2);
-        gol.toString();
         assertEquals(arrayAsString, gol.toString());
 
     }

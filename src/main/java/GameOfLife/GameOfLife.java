@@ -27,6 +27,8 @@ public class GameOfLife {
     public void startGame(int[][] grid) {
 
         convertGridToList(grid);
+        previousGenerationCells.add(nextGeneration(currentGenerationCells));
+
 
     }
 
@@ -64,29 +66,33 @@ public class GameOfLife {
     public List<Cell> nextGeneration(List<Cell> cellslist) {
 
         List<Cell> nextGenCellsCreatedHere = new ArrayList<>();
-
+        toString();
         for (Cell c : cellslist) {
             int amount2 = getAliveAmountOfNeighbours(c.getX(), c.getY());
+            Cell newCell = new Cell(c.getX(), c.getY());
 
             if (!c.isAlive()) {
                 // "har den tre grannar"
                 if (amount2 == 3) {
-                    c.alive();
+                    newCell.alive();
                 }
             } else {
                 //tre metoder :D
                 if (amount2 > 3) {
-                    c.kill();
+                    newCell.kill();
                 }
-                if (amount2 == 2 || amount2 == 3) {
-                    c.alive();
+                if (amount2 == 2) {
+                    newCell.alive();
                 }
                 if (amount2 < 2) {
-                    c.kill();
+                    newCell.kill();
                 }
             }
-            nextGenCellsCreatedHere.add(c);
+            nextGenCellsCreatedHere.add(newCell);
         }
+        currentGenerationCells = nextGenCellsCreatedHere;
+        toString();
+
         return nextGenCellsCreatedHere;
 
     }
