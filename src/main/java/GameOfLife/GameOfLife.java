@@ -33,7 +33,7 @@ public class GameOfLife {
 
         do {
             allGenerationsAsStringList.add(convertListOfCellsToString(nextGeneration(currentGenerationCells)));
-           // previousGenerationCells.add(nextGeneration(currentGenerationCells));
+            // previousGenerationCells.add(nextGeneration(currentGenerationCells));
 
         } while (patternOfGenerationIsUnique());
 
@@ -42,7 +42,7 @@ public class GameOfLife {
 
     private void printAllGenerations() {
 
-        allGenerationsAsStringList.forEach(c->System.out.println("Generation: " + (allGenerationsAsStringList.indexOf(c) + 1) + "\n" + c + "\n"));
+        allGenerationsAsStringList.forEach(c -> System.out.println("Generation: " + (allGenerationsAsStringList.indexOf(c) + 1) + "\n" + c + "\n"));
 
         /*
         previousGenerationCells.forEach(c -> System.out.println("Generation: " + (previousGenerationCells.indexOf(c) + 1) + "\n" +
@@ -67,12 +67,12 @@ public class GameOfLife {
         allGenerationsAsStringList.add(convertListOfCellsToString(currentGenerationCells));
     }
 
-    public int[][] convertListToGrid(List<Cell> cellList){
+    public int[][] convertListToGrid(List<Cell> cellList) {
         int maxX = cellList.stream().mapToInt(Cell::getX).max().orElse(0);
         int maxY = cellList.stream().mapToInt(Cell::getY).max().orElse(0);
-        int[][] grid = new int[maxX+1][maxY+1];
+        int[][] grid = new int[maxX + 1][maxY + 1];
         cellList.forEach(c -> {
-            if(c.isAlive())
+            if (c.isAlive())
                 grid[c.getX()][c.getY()] = 1;
             else
                 grid[c.getX()][c.getY()] = 0;
@@ -130,6 +130,28 @@ public class GameOfLife {
 
     }
 
+    public List<Cell> nextGeneration2(List<Cell> cellslist) {
+
+        List<Cell> nextGenCellsCreatedHere2 = new ArrayList<>();
+
+        cellslist.forEach(c->nextGenCellsCreatedHere2.add(generateNextCell(c, getAliveAmountOfNeighbours(c.getX(),c.getY()))));
+
+        currentGenerationCells = nextGenCellsCreatedHere2;
+
+        return currentGenerationCells;
+
+    }
+
+    private Cell generateNextCell(Cell c, int aliveNeighbours) {
+        Cell newCell = new Cell(c.getX(), c.getY());
+
+        if (aliveNeighbours == 3) {
+            newCell.alive();
+        } else if (c.isAlive() && aliveNeighbours == 2) {
+            newCell.alive();
+        }
+        return newCell;
+    }
 
     public List<Cell> currentGenerationsCells() {
         return currentGenerationCells;

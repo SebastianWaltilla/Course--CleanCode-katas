@@ -175,9 +175,9 @@ class GameOfLifeTest {
 
         gol.startGame(grid2);
 
-        System.out.println("<-----------printLine From Test--------");
+        System.out.println(">-----------printLine From Test");
         assertEquals(arrayAsString, gol.toString());
-        System.out.println("-----------printLine From Test-------->");
+        System.out.println("printLine From Test--------<");
     }
 
     @Test
