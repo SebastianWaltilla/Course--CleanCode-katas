@@ -38,10 +38,11 @@ class GameOfLifeTest {
         Cell cell = new Cell(2,0);
         two.add(cell);
 
-        gol.getPreviousGenerationCells().add(one);
-        gol.getPreviousGenerationCells().add(two);
+        gol.getAllGenerationsAsStringList().add(gol.convertListOfCellsToString(one));
+        gol.getAllGenerationsAsStringList().add(gol.convertListOfCellsToString(two));
+        //gol.getPreviousGenerationCells().add(two);
 
-        assertFalse(gol.patternOfGenerationsDoesntRepeats());
+        assertFalse(gol.patternOfGenerationIsUnique());
     }
 
     @Test
@@ -189,7 +190,7 @@ class GameOfLifeTest {
         };
         gol.startGame(grid2);
 
-        assertEquals(3, gol.getPreviousGenerationCells().size());
+        assertEquals(3, gol.getAllGenerationsAsStringList().size());
 
     }
 
@@ -208,7 +209,7 @@ class GameOfLifeTest {
                 {0,0,0,1,1,1,1,0,0,0}
         };
         gol.startGame(grid2);
-        assertEquals(7, gol.getPreviousGenerationCells().size());
+        assertEquals(7, gol.getAllGenerationsAsStringList().size());
 
     }
 
