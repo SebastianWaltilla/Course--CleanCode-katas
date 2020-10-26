@@ -2,7 +2,6 @@ package GameOfLife;
 
 import GameOfLife.Cell.Cell;
 
-import java.sql.SQLOutput;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -25,14 +24,15 @@ public class GameOfLife {
     }
 
     public void startGame(int[][] grid) {
-
         convertGridToList(grid);
-        previousGenerationCells.add(nextGeneration(currentGenerationCells));
 
-
+        do {
+            previousGenerationCells.add(nextGeneration(currentGenerationCells));
+            toString();
+        }while (!lastGenerationSameAsErlierGeneration());
     }
 
-    private void convertGridToList(int[][] grid) {
+    public void convertGridToList(int[][] grid) {
 
         for (int i = 0; i < grid.length; i++) {
             for (int j = 0; j < grid[0].length; j++) {
@@ -66,32 +66,31 @@ public class GameOfLife {
     public List<Cell> nextGeneration(List<Cell> cellslist) {
 
         List<Cell> nextGenCellsCreatedHere = new ArrayList<>();
-        toString();
         for (Cell c : cellslist) {
-            int amount2 = getAliveAmountOfNeighbours(c.getX(), c.getY());
+            int numberOfNeighbors = getAliveAmountOfNeighbours(c.getX(), c.getY());
             Cell newCell = new Cell(c.getX(), c.getY());
 
             if (!c.isAlive()) {
                 // "har den tre grannar"
-                if (amount2 == 3) {
+                if (numberOfNeighbors == 3) {
                     newCell.alive();
                 }
             } else {
                 //tre metoder :D
-                if (amount2 > 3) {
+                if (numberOfNeighbors > 3) {
                     newCell.kill();
                 }
-                if (amount2 == 2) {
+                if (numberOfNeighbors == 2 || numberOfNeighbors == 3) {
                     newCell.alive();
                 }
-                if (amount2 < 2) {
+                if (numberOfNeighbors < 2) {
                     newCell.kill();
                 }
             }
             nextGenCellsCreatedHere.add(newCell);
         }
         currentGenerationCells = nextGenCellsCreatedHere;
-        toString();
+
 
         return nextGenCellsCreatedHere;
 
@@ -109,17 +108,28 @@ public class GameOfLife {
     }
 
 
-    public boolean lastGenerationSameAsNext() {
+    public boolean lastGenerationSameAsErlierGeneration() {
 
-        var lastGen = previousGenerationCells.get(previousGenerationCells.size() - 1);
-        var secondLastGen = previousGenerationCells.get(previousGenerationCells.size() - 2);
+        if(previousGenerationCells.size() < 3) {
+            return false;
+        }
 
-        int count = (int)lastGen.stream()
-                .filter(two -> secondLastGen.stream().noneMatch(one -> one.equals(two))
-                ).count();
+        for (int i = 2; i < previousGenerationCells.size(); i++) {
 
-        return (count == 0);
 
+            int count = 0;
+                var lastGen = previousGenerationCells.get(previousGenerationCells.size() - 1);
+                var secondLastGen = previousGenerationCells.get(previousGenerationCells.size() - i);
+
+                count = (int)lastGen.stream()
+                        .filter(two -> secondLastGen.stream().noneMatch(one -> one.equals(two))
+                        ).count();
+
+                if (count == 0);
+                        return true;
+            }
+
+        return false;
     }
 
     public int getAliveAmountOfNeighbours(int xIn, int yIn) {
@@ -155,6 +165,7 @@ public class GameOfLife {
                 .collect(Collectors.joining(""));;
 
         System.out.print(f);
+        System.out.println("");
         return f;
 
     }
