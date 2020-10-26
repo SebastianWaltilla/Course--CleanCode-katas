@@ -3,6 +3,7 @@ import GameOfLife.Cell.Cell;
 import org.junit.jupiter.api.*;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -210,6 +211,29 @@ class GameOfLifeTest {
         };
         gol.startGame(grid2);
         assertEquals(7, gol.getAllGenerationsAsStringList().size());
+
+    }
+
+    @Test
+    void convertCellListToGrid_tets(){
+        List<Cell> one = new ArrayList<>();
+
+        one.add(new Cell(0,0));
+        one.add(new Cell(0,1));
+        one.add(new Cell(0,2));
+        one.add(new Cell(1,0));
+        one.add(new Cell(1,1));
+        one.add(new Cell(1,2));
+        one.get(0).alive();
+
+
+        int[][] grid = new int[][]{
+                {1,0,0},
+                {0,0,0}
+        };
+
+        assertEquals(1,gol.convertListToGrid(one)[0][0]);
+        assertEquals(2,gol.convertListToGrid(one).length);
 
     }
 

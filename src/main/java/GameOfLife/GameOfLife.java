@@ -67,6 +67,19 @@ public class GameOfLife {
         allGenerationsAsStringList.add(convertListOfCellsToString(currentGenerationCells));
     }
 
+    public int[][] convertListToGrid(List<Cell> cellList){
+        int maxX = cellList.stream().mapToInt(Cell::getX).max().orElse(0);
+        int maxY = cellList.stream().mapToInt(Cell::getY).max().orElse(0);
+        int[][] grid = new int[maxX+1][maxY+1];
+        cellList.forEach(c -> {
+            if(c.isAlive())
+                grid[c.getX()][c.getY()] = 1;
+            else
+                grid[c.getX()][c.getY()] = 0;
+        });
+        return grid;
+    }
+
   /*  public List<List<Cell>> getPreviousGenerationCells() {
         return previousGenerationCells;
     }*/
