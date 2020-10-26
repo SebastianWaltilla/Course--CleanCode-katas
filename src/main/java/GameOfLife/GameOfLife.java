@@ -86,10 +86,13 @@ public class GameOfLife {
     public List<Cell> nextGeneration(List<Cell> cellslist) {
 
         List<Cell> nextGenCellsCreatedHere = new ArrayList<>();
+
+
         for (Cell c : cellslist) {
             int numberOfNeighbors = getAliveAmountOfNeighbours(c.getX(), c.getY());
 
             Cell newCell = new Cell(c.getX(), c.getY());
+
 
             if (!c.isAlive()) {
                 // "har den tre grannar"
@@ -98,14 +101,11 @@ public class GameOfLife {
                 }
             } else {
                 //tre metoder :D
-                if (numberOfNeighbors > 3) {
+                if (numberOfNeighbors > 3 || numberOfNeighbors < 2) {
                     newCell.kill();
                 }
                 if (numberOfNeighbors == 2 || numberOfNeighbors == 3) {
                     newCell.alive();
-                }
-                if (numberOfNeighbors < 2) {
-                    newCell.kill();
                 }
             }
             nextGenCellsCreatedHere.add(newCell);
