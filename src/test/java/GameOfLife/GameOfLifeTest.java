@@ -150,7 +150,6 @@ class GameOfLifeTest {
        gol.startGame(grid2);
 
         assertEquals(100, gol.getCurrentGenerationCells().size());
-       assertTrue(gol.getCurrentGenerationCells().get(94).isAlive());
 
     }
 
@@ -163,15 +162,19 @@ class GameOfLifeTest {
                 {0,0,0,0,0},
                 {0,0,0,0,0}
         };
-        String arrayAsString =  "\n.,.,*,.,.,"+
-                                "\n.,.,*,.,.," +
-                                "\n.,.,*,.,.," +
+
+
+        String arrayAsString =  "\n.,.,.,.,.,"+
+                                "\n.,*,*,*,.," +
+                                "\n.,.,.,.,.," +
                                 "\n.,.,.,.,.," +
                                 "\n.,.,.,.,.,";
 
         gol.startGame(grid2);
-        assertEquals(arrayAsString, gol.toString());
 
+        System.out.println("<-----------printLine From Test--------");
+        assertEquals(arrayAsString, gol.toString());
+        System.out.println("-----------printLine From Test-------->");
     }
 
     @Test
@@ -208,6 +211,7 @@ class GameOfLifeTest {
         // this test does not show last generation of cells, only generation before last gen.
         // this is checked by watching system.print.out thru toString().
 
+        //gol.getPreviousGenerationCells().size()>
 
     }
 
