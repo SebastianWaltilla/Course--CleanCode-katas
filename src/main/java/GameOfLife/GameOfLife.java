@@ -7,7 +7,6 @@ import java.util.stream.Collectors;
 
 public class GameOfLife {
 
-    private List<int[][]> listOfGenerations;
     private List<Cell> currentGenerationCells;
     private List<List<Cell>> previousGenerationCells;
 
@@ -25,22 +24,22 @@ public class GameOfLife {
 
     public void startGame(int[][] grid) {
         convertGridToList(grid);
-        //toString();
-        do {
 
+        do {
             previousGenerationCells.add(nextGeneration(currentGenerationCells));
 
-        }while (lastGenerationSameAsErlierGeneration());
+        } while (patternOfGenerationsDoesntRepeats());
+
         printAllGenerations();
     }
 
     private void printAllGenerations() {
 
-        for(List<Cell> cellList: previousGenerationCells){
-            System.out.print("Generation: " + (previousGenerationCells.indexOf(cellList) + 1));
-            System.out.println(convertListToString(cellList));
-            System.out.println("");
-        }
+        previousGenerationCells.forEach(c -> System.out.println("Generation: " + (previousGenerationCells.indexOf(c) + 1) + "\n" +
+                convertListToString(c) +
+                "\n"));
+
+
     }
 
     public void convertGridToList(int[][] grid) {
@@ -108,29 +107,16 @@ public class GameOfLife {
     }
 
 
-
     public List<Cell> currentGenerationsCells() {
         return currentGenerationCells;
     }
 
 
-    public List<int[][]> getListOfGenerations() {
-        return listOfGenerations;
-    }
-
-
-    public boolean lastGenerationSameAsErlierGeneration() {
-
-
-        //convert list to string
-        //compare strings
+    public boolean patternOfGenerationsDoesntRepeats() {
 
         List<String> listsAsString = new ArrayList<>();
 
-        for (List<Cell> c: previousGenerationCells
-             ) {
-            listsAsString.add(convertListToString(c));
-        }
+        previousGenerationCells.forEach(c -> listsAsString.add(convertListToString(c)));
 
         return listsAsString.stream().distinct().count() == listsAsString.size();
 
@@ -148,15 +134,14 @@ public class GameOfLife {
         cellPositionOfNeighbours.add(new Cell(xIn, yIn + 1));
         cellPositionOfNeighbours.add(new Cell(xIn + 1, yIn + 1));
 
-        int n = (int) currentGenerationCells.stream()
+        return (int) currentGenerationCells.stream()
                 .filter(two -> cellPositionOfNeighbours
                         .stream()
                         .anyMatch(one -> one.getX() == two.getX() && one.getY() == two.getY()))
                 .filter(Cell::isAlive)
                 .count();
 
-        //return numberOfNeighbours;
-        return n;
+
     }
 
     @Override
@@ -166,9 +151,10 @@ public class GameOfLife {
         System.out.println("\nGeneration " + previousGenerationCells.size() + ":");
 
         String f = currentGenerationCells.stream()
-                        // if c = 0       om ja =              :(else)om nej
-                .map(c-> c.getY() == 0 ? "\n" + c.toString()  : c.toString())
-                .collect(Collectors.joining(""));;
+                // if c = 0       om ja =              :(else)om nej
+                .map(c -> c.getY() == 0 ? "\n" + c.toString() : c.toString())
+                .collect(Collectors.joining(""));
+        ;
 
         System.out.print(f);
         System.out.println("");
@@ -180,13 +166,13 @@ public class GameOfLife {
 
         String f = list.stream()
                 // if c = 0       om ja =              :(else)om nej
-                .map(c-> c.getY() == 0 ? "\n" + c.toString()  : c.toString())
-                .collect(Collectors.joining(""));;
+                .map(c -> c.getY() == 0 ? "\n" + c.toString() : c.toString())
+                .collect(Collectors.joining(""));
+        ;
 
 
         return f;
     }
-
 
 
 }

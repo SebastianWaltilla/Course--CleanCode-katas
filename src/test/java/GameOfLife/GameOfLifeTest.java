@@ -26,7 +26,7 @@ class GameOfLifeTest {
     }
 
     @Test
-    @Disabled
+
     void checkIfLastGenerationIsEqualToNextGeneration(){
         List<Cell> one = new ArrayList<>();
         List<Cell> two = new ArrayList<>();
@@ -41,7 +41,7 @@ class GameOfLifeTest {
         gol.getPreviousGenerationCells().add(one);
         gol.getPreviousGenerationCells().add(two);
 
-        assertTrue(gol.lastGenerationSameAsErlierGeneration());
+        assertFalse(gol.patternOfGenerationsDoesntRepeats());
     }
 
     @Test
@@ -85,7 +85,7 @@ class GameOfLifeTest {
     @Test
     void startGameWithGridSizeCreateCellObjects() {
         gol.startGame(3,3);
-
+        assertEquals(9, gol.getCurrentGenerationCells().size());
     }
 
     @Test
@@ -126,6 +126,7 @@ class GameOfLifeTest {
     }
 
     @Test
+    @Disabled
     @DisplayName("1. Any live cell with fewer than two live neighbors" +
             " dies, as if caused by underpopulation.")
     void aliveCellHasFewerThanTwoNeighbors(){
@@ -154,7 +155,7 @@ class GameOfLifeTest {
     }
 
     @Test
-    void printArrayToConsole(){
+    void givenStartValueExpectLastPrintToConsole(){
         int[][] grid2 = new int[][]{
                 {0,0,0,0,0},
                 {0,1,1,1,0},
@@ -188,11 +189,11 @@ class GameOfLifeTest {
         };
         gol.startGame(grid2);
 
+        assertEquals(3, gol.getPreviousGenerationCells().size());
 
     }
 
     @Test
-    @Disabled
     void runGameUntilPatternRepeats2(){
         int[][] grid2 = new int[][]{
                 {0,0,0,0,0,0,0,0,0,0},
@@ -207,16 +208,8 @@ class GameOfLifeTest {
                 {0,0,0,1,1,1,1,0,0,0}
         };
         gol.startGame(grid2);
-
-        // this test does not show last generation of cells, only generation before last gen.
-        // this is checked by watching system.print.out thru toString().
-
-        //gol.getPreviousGenerationCells().size()>
+        assertEquals(7, gol.getPreviousGenerationCells().size());
 
     }
-
-
-
-
 
 }
