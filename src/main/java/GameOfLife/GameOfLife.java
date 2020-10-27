@@ -7,6 +7,7 @@ import java.util.stream.Collectors;
 
 public class GameOfLife {
 
+    int globalCounter = 0;
     private List<Cell> currentGenerationCells;
     //private List<List<Cell>> previousGenerationCells;
     private List<String> allGenerationsAsStringList;
@@ -43,12 +44,6 @@ public class GameOfLife {
     private void printAllGenerations() {
 
         allGenerationsAsStringList.forEach(c -> System.out.println("Generation: " + (allGenerationsAsStringList.indexOf(c) + 1) + "\n" + c + "\n"));
-
-        /*
-        previousGenerationCells.forEach(c -> System.out.println("Generation: " + (previousGenerationCells.indexOf(c) + 1) + "\n" +
-                convertListToString(c) +
-                "\n"));
-*/
 
     }
 
@@ -96,45 +91,13 @@ public class GameOfLife {
 //        previousGenerationCells.add(nextGeneration(currentGenerationCells));
     }
 
+
+
     public List<Cell> nextGeneration(List<Cell> cellslist) {
-
-        List<Cell> nextGenCellsCreatedHere = new ArrayList<>();
-
-
-        for (Cell c : cellslist) {
-            int numberOfNeighbors = getAliveAmountOfNeighbours(c.getX(), c.getY());
-
-            Cell newCell = new Cell(c.getX(), c.getY());
-
-
-            if (!c.isAlive()) {
-                // "har den tre grannar"
-                if (numberOfNeighbors == 3) {
-                    newCell.alive();
-                }
-            } else {
-                //tre metoder :D
-                if (numberOfNeighbors > 3 || numberOfNeighbors < 2) {
-                    newCell.kill();
-                }
-                if (numberOfNeighbors == 2 || numberOfNeighbors == 3) {
-                    newCell.alive();
-                }
-            }
-            nextGenCellsCreatedHere.add(newCell);
-        }
-
-        currentGenerationCells = nextGenCellsCreatedHere;
-
-        return nextGenCellsCreatedHere;
-
-    }
-
-    public List<Cell> nextGeneration2(List<Cell> cellslist) {
 
         List<Cell> nextGenCellsCreatedHere2 = new ArrayList<>();
 
-        cellslist.forEach(c->nextGenCellsCreatedHere2.add(generateNextCell(c, getAliveAmountOfNeighbours(c.getX(),c.getY()))));
+        cellslist.forEach(c->nextGenCellsCreatedHere2.add(generateNextCell(c, getAliveAmountOfNeighbours(c))));
 
         currentGenerationCells = nextGenCellsCreatedHere2;
 
@@ -166,22 +129,13 @@ public class GameOfLife {
 
     }
 
-    public int getAliveAmountOfNeighbours(int xIn, int yIn) {
+    public int getAliveAmountOfNeighbours(Cell c) {
 
         // TODO: 2020-10-26 Lägga denna i Cell-klasen?
 
-        List<Cell> cellPositionOfNeighbours = new ArrayList<>();
-        cellPositionOfNeighbours.add(new Cell(xIn - 1, yIn - 1));
-        cellPositionOfNeighbours.add(new Cell(xIn, yIn - 1));
-        cellPositionOfNeighbours.add(new Cell(xIn + 1, yIn - 1));
-        cellPositionOfNeighbours.add(new Cell(xIn - 1, yIn));
-        cellPositionOfNeighbours.add(new Cell(xIn + 1, yIn));
-        cellPositionOfNeighbours.add(new Cell(xIn - 1, yIn + 1));
-        cellPositionOfNeighbours.add(new Cell(xIn, yIn + 1));
-        cellPositionOfNeighbours.add(new Cell(xIn + 1, yIn + 1));
 
         return (int) currentGenerationCells.stream()
-                .filter(two -> cellPositionOfNeighbours
+                .filter(two -> NeighbourPositions.neighbours(c)
                         .stream()
                         .anyMatch(one -> one.getX() == two.getX() && one.getY() == two.getY()))
                 .filter(Cell::isAlive)
@@ -216,15 +170,4 @@ public class GameOfLife {
                 .collect(Collectors.joining(""));
     }
 
-
 }
-
-
-
-
-
-       /* int numberOfNeighbours = (int)cellPosisionOfNeighbors.stream()
-                                                        .map( s -> grid[xIn + s.getX()][yIn + s.getY()])
-                                                        .map(Optional::ofNullable)
-                                                        .filter(s -> s.get().equals(1))
-                                                        .count();*/

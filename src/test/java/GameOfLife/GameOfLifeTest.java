@@ -62,7 +62,8 @@ class GameOfLifeTest {
         };
 
         gol.startGame(grid);
-        assertEquals(3,gol.getAliveAmountOfNeighbours(0,0));
+        Cell c = new Cell(0,0);
+        assertEquals(3,gol.getAliveAmountOfNeighbours(c));
 
     }
 
@@ -81,7 +82,8 @@ class GameOfLifeTest {
                 {0,0,0,1,1,1,1,0,0,0}
         };
         gol.convertGridToList(grid2);
-        assertEquals(5,gol.getAliveAmountOfNeighbours(1,1));
+        Cell c = new Cell(1,1);
+        assertEquals(5,gol.getAliveAmountOfNeighbours(c));
     }
 
     @Test
@@ -123,8 +125,10 @@ class GameOfLifeTest {
         gol.getCurrentGenerationCells().get(93).alive();
         gol.getCurrentGenerationCells().get(94).alive();
         gol.getCurrentGenerationCells().get(95).alive();
-        gol.getAliveAmountOfNeighbours(5,8);
-        assertEquals(2, gol.getAliveAmountOfNeighbours(9,4));
+        Cell c1 = new Cell(5,8);
+        Cell c2 = new Cell(9,4);
+        gol.getAliveAmountOfNeighbours(c1);
+        assertEquals(2, gol.getAliveAmountOfNeighbours(c2));
     }
 
     @Test
