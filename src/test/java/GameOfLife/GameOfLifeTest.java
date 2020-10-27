@@ -3,7 +3,6 @@ import GameOfLife.Cell.Cell;
 import org.junit.jupiter.api.*;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -184,5 +183,36 @@ class GameOfLifeTest {
 
     }
 
+    @Test
+    void testThroughWholeApp() {
+        int[][] grid = new int[][]{
+                {0,0,0,0,0,0,0,0,0,0},
+                {0,0,1,0,0,0,0,0,0,0},
+                {0,0,0,1,0,0,0,0,0,0},
+                {0,1,1,1,0,0,0,0,0,0},
+                {0,0,0,0,0,0,0,0,0,0},
+                {0,0,0,0,0,0,0,0,0,0},
+                {0,0,0,0,0,0,0,0,0,0},
+                {0,0,0,0,0,0,0,0,0,0},
+                {0,0,0,0,0,0,0,0,0,0},
+                {0,0,0,0,0,0,0,0,0,0}
+        };
+        int[][] grid2 = new int[][]{
+                {0,0,0,0,0,0,0,0,0,0},
+                {0,0,0,0,0,0,0,0,0,0},
+                {0,0,0,1,0,0,0,0,0,0},
+                {0,0,0,0,1,0,0,0,0,0},
+                {0,0,1,1,1,0,0,0,0,0},
+                {0,0,0,0,0,0,0,0,0,0},
+                {0,0,0,0,0,0,0,0,0,0},
+                {0,0,0,0,0,0,0,0,0,0},
+                {0,0,0,0,0,0,0,0,0,0},
+                {0,0,0,0,0,0,0,0,0,0}
+        };
 
+        gol = new GameOfLife(grid);
+        gol.startGame();
+        assertEquals(gol.convertListOfCellsToString(gol.convertGridToList(grid2)),
+                gol.getAllGenerationsAsStringList().get(4));
+    }
 }

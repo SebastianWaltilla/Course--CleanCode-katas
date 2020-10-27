@@ -11,7 +11,8 @@ public class GameOfLife {
     public GameOfLife(int[][] grid) {
         currentGenerationCells = new ArrayList<>();
         allGenerationsAsStringList = new ArrayList<>();
-        convertGridToList(grid);
+        currentGenerationCells = convertGridToList(grid);
+        allGenerationsAsStringList.add(convertListOfCellsToString(currentGenerationCells));
     }
 
     public void startGame() {
@@ -29,8 +30,9 @@ public class GameOfLife {
                         + "\n" + c + "\n"));
     }
 
-    public void convertGridToList(int[][] grid) {
+    public List<Cell> convertGridToList(int[][] grid) {
 
+        List<Cell> list = new ArrayList<>();
         for (int i = 0; i < grid.length; i++) {
             for (int j = 0; j < grid[0].length; j++) {
 
@@ -38,10 +40,11 @@ public class GameOfLife {
                 if (grid[i][j] == 1) {
                     c.alive();
                 }
-                currentGenerationCells.add(c);
+                list.add(c);
             }
+
         }
-        allGenerationsAsStringList.add(convertListOfCellsToString(currentGenerationCells));
+        return list;
     }
 
     private List<Cell> nextGeneration(List<Cell> cellslist) {
