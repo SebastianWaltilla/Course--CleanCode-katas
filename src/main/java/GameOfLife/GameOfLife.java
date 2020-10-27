@@ -10,28 +10,18 @@ public class GameOfLife {
     private List<Cell> currentGenerationCells;
     private List<String> allGenerationsAsStringList;
 
-    public GameOfLife() {
+    public GameOfLife(int[][] grid) {
         currentGenerationCells = new ArrayList<>();
         allGenerationsAsStringList = new ArrayList<>();
+        convertGridToList(grid);
     }
 
-    public void startGame(int[][] grid) {
-        convertGridToList(grid);
+    public void startGame() {
 
         do {
             allGenerationsAsStringList.add(convertListOfCellsToString(nextGeneration(currentGenerationCells)));
-
         } while (patternOfGenerationIsUnique());
-
         printAllGenerations();
-    }
-
-    public List<Cell> getCurrentGenerationCells() {
-        return currentGenerationCells;
-    }
-
-    public List<String> getAllGenerationsAsStringList() {
-        return allGenerationsAsStringList;
     }
 
     private void printAllGenerations() {
@@ -122,6 +112,13 @@ public class GameOfLife {
         return list.stream()
                 .map(c -> c.getY() == 0 ? "\n" + c.toString() : c.toString())
                 .collect(Collectors.joining(""));
+    }
+    public List<Cell> getCurrentGenerationCells() {
+        return currentGenerationCells;
+    }
+
+    public List<String> getAllGenerationsAsStringList() {
+        return allGenerationsAsStringList;
     }
 
 }

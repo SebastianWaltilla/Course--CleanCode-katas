@@ -12,15 +12,10 @@ import static org.junit.jupiter.api.Assertions.*;
 class GameOfLifeTest {
     GameOfLife gol;
 
-    @BeforeEach
-    void createFilledGrid2dArray(){
-        gol = new GameOfLife();
-
-    }
-
     @Test
-
+    @Disabled
     void checkIfLastGenerationIsEqualToNextGeneration(){
+
         List<Cell> one = new ArrayList<>();
         List<Cell> two = new ArrayList<>();
 
@@ -30,11 +25,29 @@ class GameOfLifeTest {
         two.add(new Cell(0,0));
         Cell cell = new Cell(2,0);
         two.add(cell);
-
         gol.getAllGenerationsAsStringList().add(gol.convertListOfCellsToString(one));
         gol.getAllGenerationsAsStringList().add(gol.convertListOfCellsToString(two));
 
         assertFalse(gol.patternOfGenerationIsUnique());
+    }
+
+    @Test
+    @Disabled
+    void convertGridToArray_test() {
+        int[][] grid = new int[][]{
+                {0,0,0,0,0,0,0,0,0,0},
+                {0,0,0,0,0,0,0,0,0,0},
+                {0,0,0,0,0,0,0,0,0,0},
+                {0,0,0,1,0,0,0,0,0,0},
+                {0,0,0,1,0,0,0,0,0,0},
+                {0,0,0,1,0,0,0,0,0,0},
+                {0,0,0,1,1,1,0,0,0,0},
+                {0,0,0,0,0,0,0,0,0,0},
+                {0,0,0,0,0,0,0,0,0,0},
+                {0,0,0,1,1,1,1,0,0,0}
+        };
+        gol = new GameOfLife(grid);
+        assertEquals(100, gol.getCurrentGenerationCells().size());
     }
 
     @Test
@@ -51,8 +64,8 @@ class GameOfLifeTest {
                 {0,0,0,0,0,0,0,0,0,0},
                 {0,0,0,1,1,1,1,0,0,0}
         };
-
-        gol.startGame(grid);
+        gol = new GameOfLife(grid);
+        gol.startGame();
         Cell c = new Cell(0,0);
         assertEquals(3,gol.getAliveAmountOfNeighbours(c));
 
@@ -60,7 +73,7 @@ class GameOfLifeTest {
 
     @Test
     void getAliveNeighborsOfCenterCaseCell(){
-        int[][] grid2 = new int[][]{
+        int[][] grid = new int[][]{
                 {0,1,1,0,0,0,0,0,0,0},
                 {0,0,1,0,0,0,0,0,0,0},
                 {0,1,1,0,0,0,0,0,0,0},
@@ -72,26 +85,25 @@ class GameOfLifeTest {
                 {0,0,0,0,0,0,0,0,0,0},
                 {0,0,0,1,1,1,1,0,0,0}
         };
-        gol.convertGridToList(grid2);
+        gol = new GameOfLife(grid);
         Cell c = new Cell(1,1);
         assertEquals(5,gol.getAliveAmountOfNeighbours(c));
     }
 
     @Test
     void givenGridMaxSizeNotSquareGridWithGridConstructor_test() {
-        int[][] grid2 = new int[][]{
+        int[][] grid = new int[][]{
                 {1,0,0,0,0},
                 {0,1,0,0,0},
                 {0,0,0,0,0}
         };
-
-        gol.startGame(grid2);
+        gol = new GameOfLife(grid);
         assertEquals(15, gol.getCurrentGenerationCells().size());
     }
 
     @Test
     void addAliveCellsToListWithCellsCheckIfAlive(){
-        int[][] grid2 = new int[][]{
+        int[][] grid = new int[][]{
                 {0,0,0,0,0,0,0,0,0,0},
                 {0,0,0,0,0,0,0,0,0,0},
                 {0,0,0,0,0,0,0,0,0,0},
@@ -103,8 +115,8 @@ class GameOfLifeTest {
                 {0,0,0,0,0,0,0,0,0,0},
                 {0,0,0,0,0,0,0,0,0,0}
         };
-
-        gol.startGame(grid2);
+        gol = new GameOfLife(grid);
+        gol.startGame();
         gol.getCurrentGenerationCells().get(92).alive();
         gol.getCurrentGenerationCells().get(93).alive();
         gol.getCurrentGenerationCells().get(94).alive();
@@ -115,28 +127,11 @@ class GameOfLifeTest {
         assertEquals(2, gol.getAliveAmountOfNeighbours(c2));
     }
 
-    @Test
-    void convertGridToArray_test() {
-       int[][] grid2 = new int[][]{
-               {0,0,0,0,0,0,0,0,0,0},
-               {0,0,0,0,0,0,0,0,0,0},
-               {0,0,0,0,0,0,0,0,0,0},
-               {0,0,0,1,0,0,0,0,0,0},
-               {0,0,0,1,0,0,0,0,0,0},
-               {0,0,0,1,0,0,0,0,0,0},
-               {0,0,0,1,1,1,0,0,0,0},
-               {0,0,0,0,0,0,0,0,0,0},
-               {0,0,0,0,0,0,0,0,0,0},
-               {0,0,0,1,1,1,1,0,0,0}
-       };
 
-       gol.startGame(grid2);
-       assertEquals(100, gol.getCurrentGenerationCells().size());
-    }
 
     @Test
     void givenStartValueExpectLastPrintToConsole(){
-        int[][] grid2 = new int[][]{
+        int[][] grid = new int[][]{
                 {0,0,0,0,0},
                 {0,1,1,1,0},
                 {0,0,0,0,0},
@@ -150,31 +145,28 @@ class GameOfLifeTest {
                                 "\n.,.,.,.,.," +
                                 "\n.,.,.,.,.,";
 
-        gol.startGame(grid2);
-
-        System.out.println(">-----------printLine From Test");
+        gol = new GameOfLife(grid);
         assertEquals(arrayAsString, gol.toString());
-        System.out.println("printLine From Test--------<");
     }
 
     @Test
     void runGameUntilPatternRepeats(){
-        int[][] grid2 = new int[][]{
+        int[][] grid = new int[][]{
                 {0,0,0,0,0},
                 {0,1,1,1,0},
                 {0,0,0,0,0},
                 {0,0,0,0,0},
                 {0,0,0,0,0}
         };
-        gol.startGame(grid2);
-
+        gol = new GameOfLife(grid);
+        gol.startGame();
         assertEquals(3, gol.getAllGenerationsAsStringList().size());
 
     }
 
     @Test
-    void runGameUntilPatternRepeats2(){
-        int[][] grid2 = new int[][]{
+    void runGameUntilPatternRepeatsWithLargerGrid(){
+        int[][] grid = new int[][]{
                 {0,0,0,0,0,0,0,0,0,0},
                 {0,0,0,0,0,0,0,0,0,0},
                 {0,0,0,0,0,0,0,0,0,0},
@@ -186,25 +178,11 @@ class GameOfLifeTest {
                 {0,0,0,0,0,0,0,0,0,0},
                 {0,0,0,1,1,1,1,0,0,0}
         };
-        gol.startGame(grid2);
+        gol = new GameOfLife(grid);
+        gol.startGame();
         assertEquals(7, gol.getAllGenerationsAsStringList().size());
 
     }
 
-    @Test
-    void convertCellListToGrid_tets(){
-        List<Cell> one = new ArrayList<>();
-
-        one.add(new Cell(0,0));
-        one.add(new Cell(0,1));
-        one.add(new Cell(0,2));
-        one.add(new Cell(1,0));
-        one.add(new Cell(1,1));
-        one.add(new Cell(1,2));
-        one.get(0).alive();
-
-        assertEquals(1,gol.convertListToGrid(one)[0][0]);
-        assertEquals(2,gol.convertListToGrid(one).length);
-    }
 
 }
