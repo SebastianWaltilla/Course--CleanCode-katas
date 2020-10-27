@@ -13,9 +13,6 @@ public class Cell {
         y = y2;
     }
 
-
-
-
     public int getX() {
         return x;
     }

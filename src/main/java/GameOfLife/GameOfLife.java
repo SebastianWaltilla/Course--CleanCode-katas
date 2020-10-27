@@ -1,7 +1,5 @@
 package GameOfLife;
-
 import GameOfLife.Cell.Cell;
-
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -46,27 +44,11 @@ public class GameOfLife {
         allGenerationsAsStringList.add(convertListOfCellsToString(currentGenerationCells));
     }
 
-    public int[][] convertListToGrid(List<Cell> cellList) {
-        int maxX = cellList.stream().mapToInt(Cell::getX).max().orElse(0);
-        int maxY = cellList.stream().mapToInt(Cell::getY).max().orElse(0);
-        int[][] grid = new int[maxX + 1][maxY + 1];
-        cellList.forEach(c -> {
-            if (c.isAlive())
-                grid[c.getX()][c.getY()] = 1;
-            else
-                grid[c.getX()][c.getY()] = 0;
-        });
-        return grid;
-    }
-
     private List<Cell> nextGeneration(List<Cell> cellslist) {
 
         List<Cell> nextGenCellsCreatedHere2 = new ArrayList<>();
-
         cellslist.forEach(c -> nextGenCellsCreatedHere2.add(generateNextCell(c, getAliveAmountOfNeighbours(c))));
-
         currentGenerationCells = nextGenCellsCreatedHere2;
-
         return currentGenerationCells;
 
     }
@@ -89,7 +71,8 @@ public class GameOfLife {
 
     public int getAliveAmountOfNeighbours(Cell c) {
 
-        return (int) currentGenerationCells.stream()
+        return (int) currentGenerationCells
+                .stream()
                 .filter(two -> NeighbourPositions.neighbours(c)
                         .stream()
                         .anyMatch(one -> one.getX() == two.getX() && one.getY() == two.getY()))
@@ -104,11 +87,9 @@ public class GameOfLife {
                 .map(c -> c.getY() == 0 ? "\n" + c.toString() : c.toString())
                 .collect(Collectors.joining(""));
         return f;
-
     }
 
     public String convertListOfCellsToString(List<Cell> list) {
-
         return list.stream()
                 .map(c -> c.getY() == 0 ? "\n" + c.toString() : c.toString())
                 .collect(Collectors.joining(""));
@@ -120,5 +101,4 @@ public class GameOfLife {
     public List<String> getAllGenerationsAsStringList() {
         return allGenerationsAsStringList;
     }
-
 }
