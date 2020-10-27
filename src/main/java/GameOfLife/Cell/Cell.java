@@ -32,10 +32,6 @@ public class Cell {
         this.alive = true;
     }
 
-    public void kill() {
-        alive = false;
-    }
-
     @Override
     public String toString() {
 
@@ -46,18 +42,4 @@ public class Cell {
         return rep;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Cell cell = (Cell) o;
-        return x == cell.x &&
-                y == cell.y &&
-                alive == cell.alive;
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(x, y, alive);
-    }
 }

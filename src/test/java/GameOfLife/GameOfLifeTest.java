@@ -18,14 +18,6 @@ class GameOfLifeTest {
 
     }
 
-    @DisplayName("given two int values list of current generation cells should filled with cells")
-    @Test
-    void whenStartGameGridShouldBeEqualToStartGrid() {
-        gol.startGame(3,3);
-        assertEquals(9,gol.currentGenerationsCells().size());
-
-    }
-
     @Test
 
     void checkIfLastGenerationIsEqualToNextGeneration(){
@@ -41,7 +33,6 @@ class GameOfLifeTest {
 
         gol.getAllGenerationsAsStringList().add(gol.convertListOfCellsToString(one));
         gol.getAllGenerationsAsStringList().add(gol.convertListOfCellsToString(two));
-        //gol.getPreviousGenerationCells().add(two);
 
         assertFalse(gol.patternOfGenerationIsUnique());
     }
@@ -87,31 +78,11 @@ class GameOfLifeTest {
     }
 
     @Test
-    void startGameWithGridSizeCreateCellObjects() {
-        gol.startGame(3,3);
-        assertEquals(9, gol.getCurrentGenerationCells().size());
-    }
-
-    @Test
-    void givenGridMaxSizeCellsSHouldBeCreated() {
-        gol.startGame(3,3);
-        assertEquals(9, gol.getCurrentGenerationCells().size());
-    }
-
-
-    @Test
-    void givenGridMaxSizeNotSquareGridWithIntConstructor_test() {
-        gol.startGame(3,4);
-        assertEquals(12, gol.getCurrentGenerationCells().size());
-    }
-
-    @Test
     void givenGridMaxSizeNotSquareGridWithGridConstructor_test() {
         int[][] grid2 = new int[][]{
                 {1,0,0,0,0},
                 {0,1,0,0,0},
                 {0,0,0,0,0}
-
         };
 
         gol.startGame(grid2);
@@ -120,7 +91,20 @@ class GameOfLifeTest {
 
     @Test
     void addAliveCellsToListWithCellsCheckIfAlive(){
-        gol.startGame(10,10);
+        int[][] grid2 = new int[][]{
+                {0,0,0,0,0,0,0,0,0,0},
+                {0,0,0,0,0,0,0,0,0,0},
+                {0,0,0,0,0,0,0,0,0,0},
+                {0,0,0,0,0,0,0,0,0,0},
+                {0,0,0,0,0,0,0,0,0,0},
+                {0,0,0,0,0,0,0,0,0,0},
+                {0,0,0,0,0,0,0,0,0,0},
+                {0,0,0,0,0,0,0,0,0,0},
+                {0,0,0,0,0,0,0,0,0,0},
+                {0,0,0,0,0,0,0,0,0,0}
+        };
+
+        gol.startGame(grid2);
         gol.getCurrentGenerationCells().get(92).alive();
         gol.getCurrentGenerationCells().get(93).alive();
         gol.getCurrentGenerationCells().get(94).alive();
@@ -129,14 +113,6 @@ class GameOfLifeTest {
         Cell c2 = new Cell(9,4);
         gol.getAliveAmountOfNeighbours(c1);
         assertEquals(2, gol.getAliveAmountOfNeighbours(c2));
-    }
-
-    @Test
-    @Disabled
-    @DisplayName("1. Any live cell with fewer than two live neighbors" +
-            " dies, as if caused by underpopulation.")
-    void aliveCellHasFewerThanTwoNeighbors(){
-
     }
 
     @Test
@@ -155,9 +131,7 @@ class GameOfLifeTest {
        };
 
        gol.startGame(grid2);
-
-        assertEquals(100, gol.getCurrentGenerationCells().size());
-
+       assertEquals(100, gol.getCurrentGenerationCells().size());
     }
 
     @Test
@@ -169,7 +143,6 @@ class GameOfLifeTest {
                 {0,0,0,0,0},
                 {0,0,0,0,0}
         };
-
 
         String arrayAsString =  "\n.,.,.,.,.,"+
                                 "\n.,*,*,*,.," +
@@ -230,15 +203,8 @@ class GameOfLifeTest {
         one.add(new Cell(1,2));
         one.get(0).alive();
 
-
-        int[][] grid = new int[][]{
-                {1,0,0},
-                {0,0,0}
-        };
-
         assertEquals(1,gol.convertListToGrid(one)[0][0]);
         assertEquals(2,gol.convertListToGrid(one).length);
-
     }
 
 }
