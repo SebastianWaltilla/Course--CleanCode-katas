@@ -12,44 +12,6 @@ class GameOfLifeTest {
     GameOfLife gol;
 
     @Test
-    @Disabled
-    void checkIfLastGenerationIsEqualToNextGeneration(){
-
-        List<Cell> one = new ArrayList<>();
-        List<Cell> two = new ArrayList<>();
-
-        one.add(new Cell(0,0));
-        one.add(new Cell(2,0));
-
-        two.add(new Cell(0,0));
-        Cell cell = new Cell(2,0);
-        two.add(cell);
-        gol.getAllGenerationsAsStringList().add(gol.convertListOfCellsToString(one));
-        gol.getAllGenerationsAsStringList().add(gol.convertListOfCellsToString(two));
-
-        assertFalse(gol.patternOfGenerationIsUnique());
-    }
-
-    @Test
-    @Disabled
-    void convertGridToArray_test() {
-        int[][] grid = new int[][]{
-                {0,0,0,0,0,0,0,0,0,0},
-                {0,0,0,0,0,0,0,0,0,0},
-                {0,0,0,0,0,0,0,0,0,0},
-                {0,0,0,1,0,0,0,0,0,0},
-                {0,0,0,1,0,0,0,0,0,0},
-                {0,0,0,1,0,0,0,0,0,0},
-                {0,0,0,1,1,1,0,0,0,0},
-                {0,0,0,0,0,0,0,0,0,0},
-                {0,0,0,0,0,0,0,0,0,0},
-                {0,0,0,1,1,1,1,0,0,0}
-        };
-        gol = new GameOfLife(grid);
-        assertEquals(100, gol.getCurrentGenerationCells().size());
-    }
-
-    @Test
     void getAliveNeighboursOfCornerCaseCell() {
         int[][] grid = new int[][]{
                 {0,1,0,0,0,0,0,0,0,0},
@@ -215,4 +177,45 @@ class GameOfLifeTest {
         assertEquals(gol.convertListOfCellsToString(gol.convertGridToList(grid2)),
                 gol.getAllGenerationsAsStringList().get(4));
     }
+
+    @Test
+    void testIfNeighborToTheLeftIsDeadReturn0(){
+        int[][] grid1er =  new int[][]{{0, 0, 0},
+                {0, 0, 0},
+                {0, 0, 0}};
+        gol = new GameOfLife(grid1er);
+        Cell cell = new Cell(1, 1);
+        assertEquals(0, gol.getAliveAmountOfNeighbours(cell));
+    }
+
+    @Test
+    void givenNeighborAboveLeftIsAliveThenAliveAmountOfNeighboursIs1(){
+        int[][] grid1er =  new int[][]{{1, 0, 0},
+                {0, 0, 0},
+                {0, 0, 0}};
+        gol = new GameOfLife(grid1er);
+        Cell cell = new Cell(1, 1);
+        assertEquals(1, gol.getAliveAmountOfNeighbours(cell));
+    }
+
+    @Test
+    void givenNeighborAboveCenterAndAboveRightIsAliveThenAliveAmountOfNeighboursIs2(){
+        int[][] grid1er =  new int[][]{{0, 1, 1},
+                {0, 0, 0},
+                {0, 0, 0}};
+        gol = new GameOfLife(grid1er);
+        Cell cell = new Cell(1, 1);
+        assertEquals(2, gol.getAliveAmountOfNeighbours(cell));
+    }
+
+    @Test
+    void givenNeighborToTheRightAndDownCenterIsAliveThenAliveAmountOfNeighboursIs2(){
+        int[][] grid1er =  new int[][]{{0, 0, 0},
+                {1, 0, 0},
+                {0, 1, 0}};
+        gol = new GameOfLife(grid1er);
+        Cell cell = new Cell(1, 1);
+        assertEquals(2, gol.getAliveAmountOfNeighbours(cell));
+    }
+
 }
