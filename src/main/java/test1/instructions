@@ -1,0 +1,17 @@
+    /*
+
+pizza is round, radius of R cm.
+The outermost C cm is crust == no cheese.
+What percent of George’s pizza has cheese?
+
+Input
+The input consists of a single line with two space separated integers, R and C.
+
+Output
+Output the percentage of the pizza that has cheese.
+Your answer must have an absolute or relative error of at most 10−6.
+
+Sample input: R=2  C=1
+Sample output: 25
+
+*/
